@@ -1,0 +1,9 @@
+name: julia-env
+channels:
+  - conda-forge
+dependencies:
+  - julia
+  - pip
+  - pip:
+      - notebook
+  - nodejs 
