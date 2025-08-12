@@ -82,20 +82,3 @@ dx1 = 4.0
 @show bem(r1,dx1)
 @show Zygote.jacobian(r1 -> bem(r1,dx1), r1)
 
-# # ## Just for reference - checking accuracy of computed coeffficients
-# cpt = pyimport("capytaine")
-# cptmesh = cpt.mesh_sphere(radius=r1, center=(0, 0, 0), resolution=(6, 6)).immersed_part()
-
-# cptbody = cpt.FloatingBody(cptmesh, name="sphere")
-# cptbody.add_translation_dof(name="Heave")
-# cpt_twobodies = cptbody + cptbody.translated_x(dx1, name="other_sphere")
-# xr = pyimport("xarray")
-# test_matrix = xr.Dataset(coords=Dict("omega" => [omega], "wave_direction" => [0.0],"radiating_dof" => collect(keys(cpt_twobodies.dofs))))
-# ds = cpt.BEMSolver().fill_dataset(test_matrix, cpt_twobodies, method="direct")
-# problem_1 = cpt.DiffractionProblem(body=cpt_twobodies, wave_direction=0.0, omega= omega)
-# fk = cpt.bem.airy_waves.froude_krylov_force(problem_1)
-
-# @show fk
-# @show ds.radiation_damping.values
-# @show ds.added_mass.values
-# @show ds.diffraction_force.values

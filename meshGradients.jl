@@ -217,4 +217,3 @@ function func(r1,dx1)
     return sum(imag(D)) + sum(real(S))
 end
 
-Zygote.jacobian(x->func(x[1],x[2]),[2.0,3.0])
